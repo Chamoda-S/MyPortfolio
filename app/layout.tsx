@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${playfairDisplay.variable} ${lora.variable}`}>
+    <html lang="en" className={`${playfairDisplay.variable} ${lora.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased">
         {children}
         <Analytics />
