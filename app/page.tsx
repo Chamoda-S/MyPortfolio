@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, ExternalLink, Github, Linkedin, Mail } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { Menu, X, ExternalLink, Github, Linkedin, Mail, Moon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { portfolioConfig } from '@/lib/portfolio-config';
 
 export default function Portfolio() {
@@ -17,6 +19,12 @@ export default function Portfolio() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const { theme, setTheme } = useTheme();
+  const [isThemeMounted, setIsThemeMounted] = useState(false);
+
+  useEffect(() => {
+    setIsThemeMounted(true);
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -61,7 +69,7 @@ export default function Portfolio() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm z-50 border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center gap-4">
           {/* Logo */}
           <div className="w-10 h-10 relative">
             <Image
@@ -69,39 +77,56 @@ export default function Portfolio() {
               alt="Monogram logo"
               width={40}
               height={40}
-              className="object-contain"
+              className="object-contain transition duration-200 dark:invert"
             />
           </div>
-          
-          {/* Desktop Menu */}
-          <div className="hidden md:flex gap-8">
-            {[
-              { label: 'About', id: 'about' },
-              { label: 'Projects', id: 'projects' },
-              { label: 'Skills', id: 'skills' },
-              { label: 'Experience', id: 'experience' },
-              { label: 'Contact', id: 'contact' },
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                suppressHydrationWarning
-                className="text-sm uppercase tracking-wider hover:opacity-70 transition-opacity"
-                style={{ color: 'var(--muted-foreground)' }}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            suppressHydrationWarning
-            className="md:hidden p-2"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-4">
+            {/* Desktop Menu */}
+            <div className="hidden md:flex gap-8">
+              {[
+                { label: 'About', id: 'about' },
+                { label: 'Projects', id: 'projects' },
+                { label: 'Skills', id: 'skills' },
+                { label: 'Experience', id: 'experience' },
+                { label: 'Contact', id: 'contact' },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  suppressHydrationWarning
+                  className="text-sm uppercase tracking-wider hover:opacity-70 transition-opacity"
+                  style={{ color: 'var(--muted-foreground)' }}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Theme Toggle */}
+            {isThemeMounted && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon-sm"
+                className="rounded-full border border-border/60 bg-background/60 hover:bg-secondary/70 backdrop-blur-sm"
+                aria-label="Toggle dark mode"
+                title="Dark mode"
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              >
+                <Moon className={theme === 'dark' ? 'text-white' : 'text-black'} />
+              </Button>
+            )}
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              suppressHydrationWarning
+              className="md:hidden p-2"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

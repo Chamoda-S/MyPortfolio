@@ -16,8 +16,8 @@ export const portfolioConfig = {
     email: 'chamoda.suraweera@gmail.com',
     linkedin: 'https://www.linkedin.com/in/chamoda-suraweera/',
     github: 'https://github.com/Chamoda-S',
-    medium: '#',
-    wikipedia: '#',
+    medium: 'https://medium.com/@chamoda.suraweera',
+    wikipedia: 'https://en.wikipedia.org/wiki/User:Chamoda_Suraweera',
   },
 
   // Projects - Easy to expand! Just add more objects to this array
