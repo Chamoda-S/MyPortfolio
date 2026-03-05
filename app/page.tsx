@@ -9,6 +9,45 @@ import { portfolioConfig } from '@/lib/portfolio-config';
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { personal, contact, projects, skills, experience } = portfolioConfig;
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        setSubmitStatus('error');
+        setSubmitError(data.error || 'Something went wrong. Please try again.');
+      } else {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      setSubmitError('Unable to send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -374,7 +413,7 @@ export default function Portfolio() {
           </div>
 
           <div>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <label className="text-sm uppercase tracking-wider font-medium">Name</label>
                 <input
@@ -382,6 +421,10 @@ export default function Portfolio() {
                   placeholder="Your name"
                   suppressHydrationWarning
                   className="w-full px-4 py-3 bg-secondary text-foreground placeholder-muted-foreground border border-border rounded focus:outline-none transition-colors"
+                  value={formData.name}
+                  onChange={(event) =>
+                    setFormData((prev) => ({ ...prev, name: event.target.value }))
+                  }
         style={{ "--focus-color": "var(--accent-burgundy)" } as React.CSSProperties}
                 />
               </div>
@@ -392,6 +435,10 @@ export default function Portfolio() {
                   placeholder="your@email.com"
                   suppressHydrationWarning
                   className="w-full px-4 py-3 bg-secondary text-foreground placeholder-muted-foreground border border-border rounded focus:outline-none transition-colors"
+                  value={formData.email}
+                  onChange={(event) =>
+                    setFormData((prev) => ({ ...prev, email: event.target.value }))
+                  }
         style={{ "--focus-color": "var(--accent-burgundy)" } as React.CSSProperties}
                 />
               </div>
@@ -402,16 +449,31 @@ export default function Portfolio() {
                   rows={5}
                   suppressHydrationWarning
                   className="w-full px-4 py-3 bg-secondary text-foreground placeholder-muted-foreground border border-border rounded focus:outline-none focus:border-accent-teal transition-colors resize-none"
+                  value={formData.message}
+                  onChange={(event) =>
+                    setFormData((prev) => ({ ...prev, message: event.target.value }))
+                  }
                 />
               </div>
               <button
                 type="submit"
                 suppressHydrationWarning
-                className="w-full px-8 py-3 bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+                className="w-full px-8 py-3 bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+                disabled={isSubmitting}
                 style={{ backgroundColor: 'var(--primary)' }}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
+              {submitStatus === 'success' && (
+                <p className="text-sm text-green-600">
+                  Thank you! Your message has been sent.
+                </p>
+              )}
+              {submitStatus === 'error' && submitError && (
+                <p className="text-sm text-red-600">
+                  {submitError}
+                </p>
+              )}
             </form>
           </div>
         </div>
