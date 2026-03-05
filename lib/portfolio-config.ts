@@ -5,17 +5,17 @@ export const portfolioConfig = {
   // Personal Info
   personal: {
     name: 'Chamoda Suraweera',
-    logo: 'LOGO', // Replace with your initials or logo text
-    tagline: 'Computer Science student passionate about design, innovation, and crafting digital experiences that matter.',
+    logo: 'CS', // Replace with your initials or logo text
+    tagline: 'Computer Science student passionate about design, technology, and crafting meaningful digital experiences.',
     description: 'I\'m a Computer Science undergraduate with a passion for blending design and technology.',
     bio: 'Currently working as an Intern Project Manager, I bring technical understanding combined with design sensibility. I believe great products are built at the intersection of technical excellence and thoughtful design.',
   },
 
   // Contact Information
   contact: {
-    email: 'your.email@example.com',
-    linkedin: 'https://linkedin.com/in/chamoda-suraweera',
-    github: 'https://github.com/yourusername',
+    email: 'chamoda.suraweera@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/chamoda-suraweera/',
+    github: 'https://github.com/Chamoda-S',
     medium: '#',
     wikipedia: '#',
   },
@@ -27,35 +27,35 @@ export const portfolioConfig = {
   projects: [
     {
       id: 1,
-      title: 'Project One',
-      description: 'A detailed description of your first project, highlighting the technologies used and the impact it made.',
+      title: 'Sherine Travels - Vehicle Management System',
+      description: 'Cloud-hosted vehicle rental platform enabling seamless vehicle browsing and booking while providing administrators with efficient tools to manage inventory, reservations and customer records.',
       image: '/placeholder-project-1.jpg',
-      skills: ['React', 'TypeScript'],
-      githubUrl: '#',
+      skills: ['TypeScript', 'ASP.NET', 'Azure SQL Database'],
+      githubUrl: 'https://github.com/Chamoda-S/Sherine_Travels_Vehicle_Rental_Management_System',
     },
     {
       id: 2,
-      title: 'Project Two',
-      description: 'Details about your second project, the challenges overcome, and the solutions implemented.',
+      title: 'Apartment Management System',
+      description: 'Smart apartment management web application enabling residents and administrators to manage services, communication and community interactions.',
       image: '/placeholder-project-2.jpg',
-      skills: ['UI/UX Design', 'Next.js'],
-      githubUrl: '#',
+      skills: ['TypeScript', 'Java', 'PostgreSQL'],
+      githubUrl: 'https://github.com/Chamoda-S/Apartment-Management-System',
     },
     {
       id: 3,
-      title: 'Project Three',
-      description: 'Explore how this project solved specific problems and contributed to your professional growth.',
+      title: 'SplendourLux - An E-Commerce Website',
+      description: 'Developed a full-stack eCommerce platform with an interactive product catalog, shopping cart, wishlist, and secure checkout, alongside an administrative dashboard for managing products, inventory and order tracking.',
       image: '/placeholder-project-3.jpg',
-      skills: ['Backend', 'Python'],
-      githubUrl: '#',
+      skills: ['ReactJs', 'Java', 'MySQL'],
+      githubUrl: 'https://github.com/Chamoda-S/Ecommerce-Website-Front-End',
     },
     {
       id: 4,
-      title: 'Project Four',
-      description: 'The latest addition to your portfolio showcasing recent work and emerging interests.',
+      title: 'Tic-Tac-Toe Game',
+      description: 'Developed a console-based two-player Tic-Tac-Toe game in C with dynamic board management, robust user input validation, automatic win or draw detection and file handling to record the game board state after each turn.',
       image: '/placeholder-project-4.jpg',
-      skills: ['Product Design', 'Figma'],
-      githubUrl: '#',
+      skills: ['C Language'],
+      githubUrl: 'https://github.com/Chamoda-S/Tic-tac-toe-game',
     },
     // TO ADD MORE PROJECTS:
     // Uncomment and modify below, or duplicate the structure above:
@@ -73,18 +73,18 @@ export const portfolioConfig = {
   // The page displays these 3 columns. To add more categories, you'll need to 
   // update the Skills section in page.tsx to add a 4th column.
   skills: {
-    frontend: ['React', 'TypeScript', 'Tailwind CSS', 'Next.js', 'JavaScript', 'HTML/CSS'],
-    backend: ['Python', 'JavaScript', 'SQL', 'APIs', 'Node.js', 'Express'],
-    design: ['UI/UX Design', 'Figma', 'Problem Solving', 'Innovation', 'Wireframing', 'Prototyping'],
+    frontend: ['React JS', 'HTML', 'TypeScript', 'CSS'],
+    backend: ['Java', 'C', 'SpringBoot', 'Python'],
+    design: ['UI/UX', 'Azure DevOps', 'Jira', 'Figma', 'MS Office'],
   },
 
   // Experience
   experience: [
     {
-      title: 'Project Manager Intern',
-      company: 'Company Name',
-      location: 'Location',
-      period: 'Present',
+      title: 'Project Management Intern',
+      company: 'Hayleys Business Solutions International',
+      location: 'Colombo 10, Sri Lanka',
+      period: 'Jan 2026 – Present',
       description: 'Leading project coordination and management initiatives. Bridging the gap between technical teams and stakeholders while ensuring timely delivery. This is my first professional role.',
     },
   ],
