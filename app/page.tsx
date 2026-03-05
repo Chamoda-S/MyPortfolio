@@ -4,9 +4,11 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, ExternalLink, Github, Linkedin, Mail } from 'lucide-react';
+import { portfolioConfig } from '@/lib/portfolio-config';
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { personal, contact, projects, skills, experience } = portfolioConfig;
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -44,6 +46,7 @@ export default function Portfolio() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
+                suppressHydrationWarning
                 className="text-sm uppercase tracking-wider hover:opacity-70 transition-opacity"
                 style={{ color: 'var(--muted-foreground)' }}
               >
@@ -55,6 +58,7 @@ export default function Portfolio() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            suppressHydrationWarning
             className="md:hidden p-2"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -75,6 +79,7 @@ export default function Portfolio() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
+                  suppressHydrationWarning
                   className="text-sm uppercase tracking-wider hover:opacity-70 transition-opacity text-left"
                   style={{ color: 'var(--muted-foreground)' }}
                 >
@@ -99,15 +104,16 @@ export default function Portfolio() {
                   Welcome to my portfolio
               </p>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold leading-tight tracking-tight text-balance">
-                Chamoda Suraweera
+                {personal.name}
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
-                Computer Science student passionate about design, innovation, and crafting digital experiences that matter.
+                {personal.tagline}
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
               <button
                 onClick={() => scrollToSection('contact')}
+                suppressHydrationWarning
                 className="px-6 sm:px-8 py-3 text-sm sm:text-base text-primary-foreground font-medium hover:opacity-90 transition-opacity w-full sm:w-auto text-center"
                 style={{ backgroundColor: 'var(--primary)', color: 'var(--primary-foreground)' }}
               >
@@ -115,6 +121,7 @@ export default function Portfolio() {
               </button>
               <button
                 onClick={() => scrollToSection('projects')}
+                suppressHydrationWarning
                 className="px-6 sm:px-8 py-3 text-sm sm:text-base border hover:opacity-70 transition-opacity w-full sm:w-auto text-center"
                 style={{ borderColor: 'var(--primary)', color: 'var(--primary)' }}
               >
@@ -152,19 +159,15 @@ export default function Portfolio() {
           </div>
           <div className="md:col-span-2 space-y-6">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm a Computer Science undergraduate with a passion for blending design and technology. 
-              My journey spans from competitive programming to creating intuitive user experiences, 
-              always with a focus on innovation and elegant solutions.
+              {personal.description}
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Currently working as an Intern Project Manager, I bring technical understanding combined 
-              with design sensibility. I believe great products are built at the intersection of technical 
-              excellence and thoughtful design.
+              {personal.bio}
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Beyond coursework, I contribute to public knowledge through long-form writing on{' '}
               <a
-                href="https://medium.com/@chamoda.suraweera"
+                href={contact.medium}
                 className="font-medium hover:opacity-70 transition-opacity"
                 style={{ color: 'var(--accent-burgundy)' }}
               >
@@ -172,7 +175,7 @@ export default function Portfolio() {
               </a>
               {' '}and research-based editorial work on{' '}
               <a
-                href="https://en.wikipedia.org/wiki/User:Chamoda_Suraweera"
+                href={contact.wikipedia}
                 className="font-medium hover:opacity-70 transition-opacity"
                 style={{ color: 'var(--accent-burgundy)' }}
               >
@@ -199,109 +202,30 @@ export default function Portfolio() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {/* Project 1 */}
-          <div className="group cursor-pointer">
-            <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary mb-6 group-hover:opacity-80 transition-opacity">
-              <Image
-                src="/placeholder-project-1.jpg"
-                alt="Project 1"
-                fill
-                className="object-cover"
-              />
+          {projects.slice(0, 4).map((project) => (
+            <div key={project.id} className="group cursor-pointer">
+              <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary mb-6 group-hover:opacity-80 transition-opacity">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="space-y-3">
+                <h3 className="text-2xl font-serif font-bold">{project.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+                <a
+                  href={project.githubUrl}
+                  className="inline-block px-6 py-2 border border-border hover:opacity-70 transition-opacity text-sm font-medium mt-4"
+                  style={{ color: 'var(--accent-burgundy)', borderColor: 'var(--accent-burgundy)' }}
+                >
+                  GitHub Repo
+                </a>
+                <p className="text-xs text-muted-foreground mt-2">{project.skills.join(', ')}</p>
+              </div>
             </div>
-            <div className="space-y-3">
-              <h3 className="text-2xl font-serif font-bold">Project One</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                A detailed description of your first project, highlighting the technologies used and the impact it made.
-              </p>
-              <a
-                href="#"
-                className="inline-block px-6 py-2 border border-border hover:opacity-70 transition-opacity text-sm font-medium mt-4"
-                style={{ color: 'var(--accent-burgundy)', borderColor: 'var(--accent-burgundy)' }}
-              >
-                GitHub Repo
-              </a>
-              <p className="text-xs text-muted-foreground mt-2">React, TypeScript</p>
-            </div>
-          </div>
-
-          {/* Project 2 */}
-          <div className="group cursor-pointer">
-            <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary mb-6 group-hover:opacity-80 transition-opacity">
-              <Image
-                src="/placeholder-project-2.jpg"
-                alt="Project 2"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="space-y-3">
-              <h3 className="text-2xl font-serif font-bold">Project Two</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Details about your second project, the challenges overcome, and the solutions implemented.
-              </p>
-              <a
-                href="#"
-                className="inline-block px-6 py-2 border border-border hover:opacity-70 transition-opacity text-sm font-medium mt-4"
-                style={{ color: 'var(--accent-burgundy)', borderColor: 'var(--accent-burgundy)' }}
-              >
-                GitHub Repo
-              </a>
-              <p className="text-xs text-muted-foreground mt-2">UI/UX Design, Next.js</p>
-            </div>
-          </div>
-
-          {/* Project 3 */}
-          <div className="group cursor-pointer">
-            <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary mb-6 group-hover:opacity-80 transition-opacity">
-              <Image
-                src="/placeholder-project-3.jpg"
-                alt="Project 3"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="space-y-3">
-              <h3 className="text-2xl font-serif font-bold">Project Three</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Explore how this project solved specific problems and contributed to your professional growth.
-              </p>
-              <a
-                href="#"
-                className="inline-block px-6 py-2 border border-border hover:opacity-70 transition-opacity text-sm font-medium mt-4"
-                style={{ color: 'var(--accent-burgundy)', borderColor: 'var(--accent-burgundy)' }}
-              >
-                GitHub Repo
-              </a>
-              <p className="text-xs text-muted-foreground mt-2">Backend, Python</p>
-            </div>
-          </div>
-
-          {/* Project 4 */}
-          <div className="group cursor-pointer">
-            <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary mb-6 group-hover:opacity-80 transition-opacity">
-              <Image
-                src="/placeholder-project-4.jpg"
-                alt="Project 4"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="space-y-3">
-              <h3 className="text-2xl font-serif font-bold">Project Four</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                The latest addition to your portfolio showcasing recent work and emerging interests.
-              </p>
-              <a
-                href="#"
-                className="inline-block px-6 py-2 border border-border hover:opacity-70 transition-opacity text-sm font-medium mt-4"
-                style={{ color: 'var(--accent-burgundy)', borderColor: 'var(--accent-burgundy)' }}
-              >
-                GitHub Repo
-              </a>
-              <p className="text-xs text-muted-foreground mt-2">Product Design, Figma</p>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -324,7 +248,7 @@ export default function Portfolio() {
           <div className="space-y-4">
             <h3 className="text-lg font-bold uppercase tracking-wide">Frontend</h3>
             <ul className="space-y-3">
-              {['React', 'TypeScript', 'Tailwind CSS', 'Next.js'].map((skill) => (
+              {skills.frontend.map((skill) => (
                 <li key={skill} className="text-muted-foreground flex items-center gap-3">
                   <span
                     className="w-1.5 h-1.5 rounded-full"
@@ -340,7 +264,7 @@ export default function Portfolio() {
           <div className="space-y-4">
             <h3 className="text-lg font-bold uppercase tracking-wide">Backend</h3>
             <ul className="space-y-3">
-              {['Python', 'JavaScript', 'SQL', 'APIs'].map((skill) => (
+              {skills.backend.map((skill) => (
                 <li key={skill} className="text-muted-foreground flex items-center gap-3">
                   <span
                     className="w-1.5 h-1.5 rounded-full"
@@ -356,7 +280,7 @@ export default function Portfolio() {
           <div className="space-y-4">
             <h3 className="text-lg font-bold uppercase tracking-wide">Design & Other</h3>
             <ul className="space-y-3">
-              {['UI/UX Design', 'Figma', 'Problem Solving', 'Innovation'].map((skill) => (
+              {skills.design.map((skill) => (
                 <li key={skill} className="text-muted-foreground flex items-center gap-3">
                   <span
                     className="w-1.5 h-1.5 rounded-full"
@@ -385,20 +309,18 @@ export default function Portfolio() {
         </div>
 
         <div className="space-y-12">
-          {/* Experience Item 1 */}
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            <div>
-              <p className="text-sm uppercase tracking-wider text-muted-foreground">Present</p>
-              <p className="font-bold text-lg mt-2">Project Manager Intern</p>
+          {experience.map((item) => (
+            <div key={`${item.company}-${item.title}-${item.period}`} className="grid md:grid-cols-3 gap-6 md:gap-8">
+              <div>
+                <p className="text-sm uppercase tracking-wider text-muted-foreground">{item.period}</p>
+                <p className="font-bold text-lg mt-2">{item.title}</p>
+              </div>
+              <div className="md:col-span-2">
+                <p className="text-muted-foreground leading-relaxed mb-3">{item.description}</p>
+                <p className="text-sm text-muted-foreground">{item.company} • {item.location}</p>
+              </div>
             </div>
-            <div className="md:col-span-2">
-              <p className="text-muted-foreground leading-relaxed mb-3">
-                Leading project coordination and management initiatives. Bridging the gap between technical 
-                teams and stakeholders while ensuring timely delivery. This is my first professional role.
-              </p>
-              <p className="text-sm text-muted-foreground">Hayleys Business Solutions International • Colombo 10</p>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -424,14 +346,14 @@ export default function Portfolio() {
             </p>
             <div className="flex flex-col gap-4">
               <a
-                href="mailto:your.email@example.com"
+                href={`mailto:${contact.email}`}
                 className="inline-flex items-center gap-3 text-lg font-medium hover:opacity-70 transition-opacity"
               >
                 <Mail size={20} style={{ color: 'var(--accent-burgundy)' }} />
-                chamoda.suraweera@gmail.com
+                {contact.email}
               </a>
               <a
-                href="https://linkedin.com/in/chamoda-suraweera"
+                href={contact.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 text-lg font-medium hover:opacity-70 transition-opacity"
@@ -440,7 +362,7 @@ export default function Portfolio() {
                 LinkedIn
               </a>
               <a
-                href="https://github.com/Chamoda-S"
+                href={contact.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 text-lg font-medium hover:opacity-70 transition-opacity"
@@ -458,6 +380,7 @@ export default function Portfolio() {
                 <input
                   type="text"
                   placeholder="Your name"
+                  suppressHydrationWarning
                   className="w-full px-4 py-3 bg-secondary text-foreground placeholder-muted-foreground border border-border rounded focus:outline-none transition-colors"
         style={{ "--focus-color": "var(--accent-burgundy)" } as React.CSSProperties}
                 />
@@ -467,6 +390,7 @@ export default function Portfolio() {
                 <input
                   type="email"
                   placeholder="your@email.com"
+                  suppressHydrationWarning
                   className="w-full px-4 py-3 bg-secondary text-foreground placeholder-muted-foreground border border-border rounded focus:outline-none transition-colors"
         style={{ "--focus-color": "var(--accent-burgundy)" } as React.CSSProperties}
                 />
@@ -476,11 +400,13 @@ export default function Portfolio() {
                 <textarea
                   placeholder="Your message..."
                   rows={5}
+                  suppressHydrationWarning
                   className="w-full px-4 py-3 bg-secondary text-foreground placeholder-muted-foreground border border-border rounded focus:outline-none focus:border-accent-teal transition-colors resize-none"
                 />
               </div>
               <button
                 type="submit"
+                suppressHydrationWarning
                 className="w-full px-8 py-3 bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
                 style={{ backgroundColor: 'var(--primary)' }}
               >
@@ -493,7 +419,7 @@ export default function Portfolio() {
 
       {/* Footer */}
       <footer className="py-12 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto border-t border-border text-center text-muted-foreground text-sm">
-        <p>© 2024 Chamoda Suraweera. All rights reserved.</p>
+        <p>© 2024 {personal.name}. All rights reserved.</p>
       </footer>
     </div>
   );
