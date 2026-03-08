@@ -21,6 +21,7 @@ export default function Portfolio() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const { theme, setTheme } = useTheme();
   const [isThemeMounted, setIsThemeMounted] = useState(false);
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   useEffect(() => {
     setIsThemeMounted(true);
@@ -266,7 +267,7 @@ export default function Portfolio() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {projects.slice(0, 4).map((project) => (
+          {(showAllProjects ? projects : projects.slice(0, 4)).map((project) => (
             <div key={project.id} className="group cursor-pointer">
               <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary mb-6 group-hover:opacity-80 transition-opacity">
                 <Image
@@ -291,6 +292,19 @@ export default function Portfolio() {
             </div>
           ))}
         </div>
+
+        {projects.length > 4 && (
+          <div className="flex justify-center mt-10">
+            <button
+              type="button"
+              onClick={() => setShowAllProjects((prev) => !prev)}
+              className="inline-block px-10 py-2 border border-border hover:opacity-70 transition-opacity text-xs font-medium tracking-[0.25em] uppercase rounded-full cursor-pointer"
+              style={{ color: 'var(--accent-burgundy)', borderColor: 'var(--accent-burgundy)' }}
+            >
+              {showAllProjects ? 'Show Less' : 'Show More'}
+            </button>
+          </div>
+        )}
       </section>
 
       {/* Skills Section */}

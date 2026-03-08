@@ -58,6 +58,22 @@ export const portfolioConfig = {
       githubUrl: 'https://github.com/Chamoda-S/Tic-tac-toe-game',
     },
     // TO ADD MORE PROJECTS:
+    {
+      id: 5,
+      title: 'Christmas Forest - VR Scene',
+      description: 'Developed an immersive virtual reality experience of a magical Christmas forest using Unity XR Toolkit, creating an interactive environment designed to explore festive landscapes in VR.',
+      image: '/placeholder-project-5.jpg',
+      skills: ['Unity 3D', 'VR', 'Unity XR Toolkit'],
+      githubUrl: 'https://github.com/Chamoda-S/ChristmasForest-UnityProject',
+    },
+    // {
+    //   id: 5,
+    //   title: 'Project Five',
+    //   description: 'Your new project description here.',
+    //   image: '/placeholder-project-5.jpg',
+    //   skills: ['Skill 1', 'Skill 2'],
+    //   githubUrl: '#',
+    // },
     // Uncomment and modify below, or duplicate the structure above:
     // {
     //   id: 5,
