@@ -66,14 +66,14 @@ export const portfolioConfig = {
       skills: ['Unity 3D', 'VR', 'Unity XR Toolkit'],
       githubUrl: 'https://github.com/Chamoda-S/ChristmasForest-UnityProject',
     },
-    // {
-    //   id: 5,
-    //   title: 'Project Five',
-    //   description: 'Your new project description here.',
-    //   image: '/placeholder-project-5.jpg',
-    //   skills: ['Skill 1', 'Skill 2'],
-    //   githubUrl: '#',
-    // },
+    {
+      id: 6,
+      title: 'Hybrid 2D/3D Office Layout Designer',
+      description: 'Developed a hybrid 2D–3D OpenGL interactive office designer featuring custom line and circle rendering, enabling users to visually design and arrange office layouts within a dynamic graphical environment.',
+      image: '/placeholder-project-5.jpg',
+      skills: ['C++', 'OpenGL'],
+      githubUrl: 'https://github.com/Chamoda-S/OpenGL-Office-Designer',
+    },
     // Uncomment and modify below, or duplicate the structure above:
     // {
     //   id: 5,
