@@ -300,6 +300,7 @@ export default function Portfolio() {
               onClick={() => setShowAllProjects((prev) => !prev)}
               className="inline-block px-10 py-2 border border-border hover:opacity-70 transition-opacity text-xs font-medium tracking-[0.25em] uppercase rounded-full cursor-pointer"
               style={{ color: 'var(--accent-burgundy)', borderColor: 'var(--accent-burgundy)' }}
+              suppressHydrationWarning
             >
               {showAllProjects ? 'Show Less' : 'Show More'}
             </button>
