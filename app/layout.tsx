@@ -9,7 +9,7 @@ const lora = Lora({ subsets: ["latin"], variable: '--font-sans' });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Chamoda Suraweera | Computer Science & Design',
+  title: 'Chamoda Suraweera',
   description: 'Personal portfolio of Chamoda Suraweera. Computer Science student passionate about design, innovation, and technology.',
   generator: 'v0.app',
   icons: {
