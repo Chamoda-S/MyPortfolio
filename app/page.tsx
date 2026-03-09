@@ -408,7 +408,7 @@ export default function Portfolio() {
                       src={company.logo}
                       alt={`${company.company} logo`}
                       fill
-                      className="object-cover dark:invert"
+                      className="object-cover"
                     />
                   ) : (
                     <span className="text-xs font-semibold tracking-[0.22em] text-muted-foreground">
