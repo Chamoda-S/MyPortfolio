@@ -66,6 +66,16 @@ export default function Portfolio() {
     }
   };
 
+  const getCompanyInitials = (companyName: string) => {
+    return companyName
+      .split(' ')
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((word) => word[0])
+      .join('')
+      .toUpperCase();
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
@@ -387,16 +397,43 @@ export default function Portfolio() {
           </div>
         </div>
 
-        <div className="space-y-12">
-          {experience.map((item) => (
-            <div key={`${item.company}-${item.title}-${item.period}`} className="grid md:grid-cols-3 gap-6 md:gap-8">
-              <div>
-                <p className="text-sm uppercase tracking-wider text-muted-foreground">{item.period}</p>
-                <p className="font-bold text-lg mt-2">{item.title}</p>
+        <div className="space-y-14">
+          {experience.map((company) => (
+            <div key={company.company} className="grid md:grid-cols-3 gap-6 md:gap-8">
+              {/* Company header (logo + name) */}
+              <div className="flex items-start gap-4">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden border border-border bg-secondary flex items-center justify-center shrink-0">
+                  {company.logo ? (
+                    <Image
+                      src={company.logo}
+                      alt={`${company.company} logo`}
+                      fill
+                      className="object-contain p-2 dark:invert"
+                    />
+                  ) : (
+                    <span className="text-xs font-semibold tracking-[0.22em] text-muted-foreground">
+                      {getCompanyInitials(company.company)}
+                    </span>
+                  )}
+                </div>
+                <div className="pt-0.5">
+                  <p className="font-bold text-lg leading-tight">{company.company}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{company.location}</p>
+                </div>
               </div>
+
+              {/* Roles (nested under the same company, LinkedIn-style) */}
               <div className="md:col-span-2">
-                <p className="text-muted-foreground leading-relaxed mb-3">{item.description}</p>
-                <p className="text-sm text-muted-foreground">{item.company} • {item.location}</p>
+                <div className="space-y-10">
+                  {company.roles.map((role) => (
+                    <div key={`${role.title}-${role.period}`} className="relative pl-6">
+                      <div className="absolute left-0 top-2 bottom-2 w-px bg-border" />
+                      <p className="text-sm uppercase tracking-wider text-muted-foreground">{role.period}</p>
+                      <p className="font-bold text-lg mt-2">{role.title}</p>
+                      <p className="text-muted-foreground leading-relaxed mt-3">{role.description}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ))}

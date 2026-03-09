@@ -113,11 +113,19 @@ export const portfolioConfig = {
   // Experience
   experience: [
     {
-      title: 'Project Management Intern',
       company: 'Hayleys Business Solutions International',
       location: 'Colombo 10, Sri Lanka',
-      period: 'Jan 2026 – Present',
-      description: 'Leading project coordination and management initiatives. Bridging the gap between technical teams and stakeholders while ensuring timely delivery. This is my first professional role.',
+      // Add the company logo file to `/public` and set the path here (example: '/companies/hayleys.png')
+      logo: 'hbsi.jpg',
+      // Add promotions/role changes as additional items in `roles` (keeps the company as one entry, like LinkedIn)
+      roles: [
+        {
+          title: 'Project Management Intern',
+          period: 'Jan 2026 – Present',
+          description:
+            'Leading project coordination and management initiatives. Bridging the gap between technical teams and stakeholders while ensuring timely delivery. This is my first professional role.',
+        },
+      ],
     },
   ],
 };
